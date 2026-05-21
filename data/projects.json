@@ -1,0 +1,87 @@
+[
+  {
+    "id": "hoopsync",
+    "title": "HoopSync",
+    "subtitle": "Dual-Stage Sequential Basketball Shot Classification Modeling",
+    "description": "A decoupled, asynchronous computer vision architecture designed for continuous video classification, shifting from spatial detection to temporal shot classification.",
+    "longDescription": "### The Bottleneck\nStandard action recognition models suffer catastrophic degradation in out-of-distribution (OOD) environments with unstandardized cameras. Furthermore, relying on continuous frame-by-frame ball tracking is inherently brittle due to severe motion blur during high-velocity trajectories.\n\n### The Architecture\nEngineered a decoupled, asynchronous pipeline. Stage 1 uses a highly regularized YOLOv8 Nano trained on a 95/5 hard-negative split, acting as a spatial anchor. Clip extraction is governed by a geometrically invariant state machine (e.g., Rim Intersection Conditions) rather than continuous tracking. Validated clips are routed via an asynchronous event manager (with explicit VRAM deallocation) to Stage 2: a Video Swin-B Transformer for temporal classification.\n\n### The Trade-offs\nHigh-capacity detection models memorized domain-specific textures. Constraining the pipeline to a Nano architecture forced the network to converge on invariant kinematic postures. Additionally, decoupling the spatial and temporal models asynchronously prevented Out-Of-Memory (OOM) failures on edge hardware.\n\n### The Output\nThe spatial extraction module achieved 95.5% mAP50, demonstrating extreme resilience to occlusion. The Swin-B classifier attained 82.66% top-1 and 92.05% make/miss accuracy in-domain (Basketball-51), translating accurately to a 0.27 mean absolute error in expected scoreboard points.",
+    "category": "featured",
+    "tags": ["Computer Vision", "Video Swin", "YOLOv8", "Basketball", "Asynchronous Pipeline"],
+    "stack": ["Python", "PyTorch", "YOLOv8 Nano", "Video Swin-B", "OpenCV"],
+    "thumbnail": "/images/projects/hoop-sync/hoop_sync_thumbnail.png",
+    "images": [
+      "/images/projects/hoop-sync/carousel hoop sync.png",
+      "/images/projects/hoop-sync/extract done.png",
+      "/images/projects/hoop-sync/score.png"
+    ],
+    "liveUrl": null,
+    "repoUrl": "https://github.com/Bixzare/Hoop-Sync/tree/main/training",
+    "year": 2026,
+    "featured": true,
+    "order": 1
+  },
+  {
+    "id": "credit-scoring-mlops",
+    "title": "Fairness-Aware Credit Scoring",
+    "subtitle": "Interpretable MLOps & Bias Mitigation",
+    "description": "A production-grade credit default prediction pipeline targeting unbanked populations, featuring structural bias mitigation, SHAP explainability, and sub-100 ms inference.",
+    "longDescription": "### The Bottleneck\nTraditional credit scoring systems exclude thin-file populations, while standard machine learning models frequently inherit and amplify systemic demographic biases embedded in historical financial data.\n\n### The Architecture\nEngineered a robust feature pipeline integrating alternative behavioral signals (telecom and utility proxies) to assess creditworthiness without formal credit histories. Orchestrated an end-to-end MLOps pipeline using MLflow for experiment tracking and versioning. The core engine is an Optuna-tuned LightGBM model. Crucially, bias mitigation was not treated as a post-hoc correction; it was embedded directly into the training stage using an Exponentiated Gradient wrapper to enforce a Demographic Parity constraint. Deployed via a stateless FastAPI backend and a Streamlit diagnostic dashboard.\n\n### The Trade-offs\nEvaluated XGBoost versus LightGBM. Selected LightGBM despite a statistically negligible 0.0007 AUC-ROC deficit due to its superior operational characteristics: sub-100 ms inference latency, lower memory footprint (no GPU dependency), and native compatibility with the fairness wrapper. Successfully navigated the algorithmic fairness trade-off, willingly sacrificing around 0.07 AUC to achieve meaningful convergence in predictive equity.\n\n### The Output\nThe baseline model achieved 0.7642 AUC-ROC with highly stable 5-fold cross-validation. The integrated bias mitigation reduced the gender demographic parity difference by 13.0%. Global SHAP analysis proved that the engineered alternative data signals were the dominant predictors, ensuring transparency for regulatory compliance. This architecture ultimately received the Best Research Paper award at the CMU-Africa Research Showcase.",
+    "category": "featured",
+    "tags": ["MLOps", "Fairlearn", "LightGBM", "SHAP", "Optuna", "FastAPI"],
+    "stack": ["Python", "LightGBM", "Fairlearn", "MLflow", "FastAPI", "Streamlit", "Optuna"],
+    "thumbnail": "/images/projects/fair-credit-africa/faircredit_africa_thumbnail.png",
+    "images": [
+      "/images/projects/fair-credit-africa/ai chat.png",
+      "/images/projects/fair-credit-africa/credit-score-output.png",
+      "/images/projects/fair-credit-africa/ml-ops.png",
+      "/images/projects/fair-credit-africa/shap.png"
+    ],
+    "liveUrl": null,
+    "repoUrl": "https://github.com/George-techie/Credit-scoring-fairness",
+    "year": 2026,
+    "featured": true,
+    "order": 2
+  },
+  {
+    "id": "cofina-agentic-architecture",
+    "title": "CoFina",
+    "subtitle": "Adaptive Multi-Agent Financial Architecture",
+    "description": "A persistent, role-structured multi-agent system featuring a three-tier memory architecture, automated evaluation, and closed-loop adaptive control.",
+    "longDescription": "### The Bottleneck\nStandard monolithic RAG agents fail at long-term reliability. They lack multi-session persistent memory, struggle with complex tool chaining via prompt heuristics, and possess no closed-loop adaptive behavioral control.\n\n### The Architecture\nRefactored from a monolithic core into a role-structured ORDAEU (Observe-Reason-Decide-Act-Evaluate-Update) multi-agent framework. Six specialized agents (Planner, Critic, Guardrail, etc.) operate over a shared state layer. Engineered a three-tier memory system (Deque short-term, SQLite/ChromaDB long-term, Ephemeral cache) governed by an importance-scored write policy.\n\n### The Trade-offs\nReplaced brittle prompt-level tool execution with explicit structured routing, eliminating infinite dialogue loops and improving tool invocation accuracy to 94%. Opted for an importance-based write policy to reduce database growth by 60% while maintaining critical context. Implemented Reflexion-based adaptive triggers (e.g., exponential backoff) rather than passive evaluation.\n\n### The Output\nMulti-session context recall improved from 0.45 to 0.94. Caching and memory optimizations reduced RAG response latency by 80.9%, dropping from 4.2 seconds to 0.8 seconds. The system maintained a 0.90 groundedness score with a minimal 0.04 hallucination rate across rigorous test cases.",
+    "category": "vault",
+    "tags": ["Agentic Systems", "Multi-Agent", "RAG", "ChromaDB", "ORDAEU", "Python"],
+    "stack": ["Python", "LangChain", "ChromaDB", "SQLite", "Custom Orchestrator"],
+    "thumbnail": "/images/projects/cofina/thumbnail.png",
+    "images": [
+      "/images/projects/cofina/in progress.png",
+      "/images/projects/cofina/plan is to pdf.png",
+      "/images/projects/cofina/sign up.png"
+    ],
+    "liveUrl": null,
+    "repoUrl": "https://github.com/Bixzare/CoFina",
+    "year": 2026,
+    "featured": false,
+    "order": 3
+  },
+  {
+    "id": "spearphish-security-pipeline",
+    "title": "SpearPhish",
+    "subtitle": "Real-Time Adversarial Threat Detection",
+    "description": "A live data pipeline and multi-layered detection engine designed to identify ephemeral phishing infrastructure that bypasses standard secure email gateways.",
+    "longDescription": "### The Bottleneck\nStandard security layers (blacklists, firewalls) fail against sophisticated threats utilizing complex redirect chains and clean HTML templates. Furthermore, training adversarial machine learning models on static, historical datasets fails due to Link Rot, because phishing infrastructure is highly ephemeral and historical URLs quickly become useless for live threat modeling.\n\n### The Architecture\nPivoted from static CSV datasets to engineer a live, real-time data ingestion pipeline. Scraped active zero-day threats directly from PhishTank and orchestrated a custom 3-stage detection funnel.\n1. NLP Layer: Evaluates email payloads for psychological coercion and urgency triggers.\n2. Network/Redirect Layer: A custom scraper that traces HTTP hops to unmask heavily obfuscated final destinations.\n3. Structural Layer: An XGBoost model that parses the DOM/HTML structure of the landing page, classifying the architectural differences between structurally barren fake login forms and complex legitimate sites.\n\n### The Trade-offs\nAbandoning static datasets for a live scraping pipeline introduced significant data-gathering latency and network timeout complexities. However, we traded the convenience of clean Kaggle data for real-world deployment viability, ensuring the model learned to detect active, ephemeral infrastructure rather than outdated traps.\n\n### The Output\nThe NLP classification layer achieved a 96% F1 Score. The combined end-to-end pipeline achieved around 80% accuracy on live, zero-day links pulled directly from PhishTank. The system proved that underlying structural commonalities in adversarial traps can be systematically classified without executing the malicious payload.",
+    "category": "vault",
+    "tags": ["Cybersecurity", "XGBoost", "NLP", "Live Pipeline", "Network Analysis"],
+    "stack": ["Python", "XGBoost", "NLP (Scikit-Learn/NLTK)", "BeautifulSoup", "Requests/HTTP"],
+    "thumbnail": "/images/projects/SpearPhish/thumbnail.png",
+    "images": [
+      "/images/projects/SpearPhish/benign.png",
+      "/images/projects/SpearPhish/phishing.png",
+      "/images/projects/SpearPhish/text-classification.png"
+    ],
+    "liveUrl": null,
+    "repoUrl": "https://github.com/Bixzare/SpearPhish",
+    "year": 2026,
+    "featured": false,
+    "order": 4
+  }
+]
