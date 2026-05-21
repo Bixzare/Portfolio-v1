@@ -3,6 +3,7 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Inter, Geist } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/sections";
 import { ThemeLightRays } from "@/components/ui/theme-light-rays";
@@ -82,6 +83,7 @@ export default function RootLayout({
             <main>{children}</main>
           </div>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
