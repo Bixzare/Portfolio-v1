@@ -28,7 +28,7 @@ export function Hero() {
           transition={SPRING}
           className="text-muted-foreground mb-4 text-xs font-medium uppercase tracking-[0.18em] sm:text-sm sm:tracking-widest"
         >
-          Developer &middot; Engineer &middot; Creator
+          Machine Learning & AI Engineer
         </motion.p>
 
         {/* Main heading — massive typography */}
@@ -49,8 +49,7 @@ export function Hero() {
           transition={SPRING}
           className="text-muted-foreground mt-6 max-w-xl text-base leading-relaxed sm:mt-8 sm:text-xl"
         >
-          I design and build software with an obsessive focus on craft,
-          performance, and the details that make experiences feel alive.
+          I engineer scalable AI infrastructure, turning complex data and agentic workflows into functional, production-ready systems.
         </motion.p>
       </motion.div>
     </section>
